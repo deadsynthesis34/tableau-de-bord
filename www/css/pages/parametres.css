@@ -1,0 +1,62 @@
+/* Page Paramètres */
+
+.parametres {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 640px;
+}
+
+.parametres-bloc {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.case-a-cocher {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.case-a-cocher input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--bleu-nuit);
+}
+
+.champ-cle {
+  display: flex;
+  gap: 8px;
+}
+
+.champ-cle input {
+  flex: 1;
+  min-width: 0;
+}
+
+.parametres-aide {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.parametres-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.parametres-resultat {
+  min-height: 1.2em;
+  font-size: 0.85rem;
+}
+
+.parametres-resultat.erreur {
+  color: #8a1f1f;
+}
+
+.parametres-enregistrer {
+  align-self: flex-start;
+}

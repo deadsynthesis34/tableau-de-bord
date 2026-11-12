@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tableau de bord étudiant</title>
+
+  <!-- Ordre important : les variables d'abord, puis la base, puis le reste -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <!-- Ajouté pour charger le style de la page Accueil -->
+  <link rel="stylesheet" href="css/pages/accueil.css">
+  <!-- Ajouté pour charger le style de la page Dépenses -->
+  <link rel="stylesheet" href="css/pages/depenses.css">
+  <!-- Ajouté pour charger le style de la page Calendrier -->
+  <link rel="stylesheet" href="css/pages/calendrier.css">
+  <!-- Ajouté pour charger le style de la page IA et de la page Paramètres -->
+  <link rel="stylesheet" href="css/pages/ia.css">
+  <link rel="stylesheet" href="css/pages/parametres.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Barre latérale : logo + 4 boutons de navigation -->
+    <nav class="barre-laterale" aria-label="Navigation principale">
+      <img class="logo" src="assets/logo.svg" alt="Logo du tableau de bord">
+
+      <ul class="menu">
+        <li>
+          <button class="menu-bouton" data-page="accueil" aria-label="Accueil" title="Accueil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5h4v5"/>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="menu-bouton" data-page="calendrier" aria-label="Calendrier et évènements" title="Calendrier et évènements">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="menu-bouton" data-page="depenses" aria-label="Dépenses" title="Dépenses">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 20v-7M12 20V5M19 20v-10"/>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="menu-bouton" data-page="ia" aria-label="Assistant IA" title="Assistant IA">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16v4M17 18h4"/>
+            </svg>
+          </button>
+        </li>
+        <!-- Ajouté pour le bouton Paramètres (roue), placé en bas de la barre -->
+        <li class="menu-element-bas">
+          <button class="menu-bouton" data-page="parametres" aria-label="Paramètres" title="Paramètres">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Zone principale : une section par page, une seule visible à la fois -->
+    <main class="contenu">
+      <section class="page" id="page-accueil" hidden>
+        <h1 class="titre-page">Accueil</h1>
+        <!-- supprimé pour remplacer le texte provisoire par la vraie page Accueil :
+        <p class="page-vide">Cette page sera construite à l'étape suivante.</p>
+        -->
+        <!-- Ajouté pour recevoir le contenu de la page Accueil, rempli par js/pages/accueil.js -->
+        <div id="accueil-contenu"></div>
+      </section>
+
+      <section class="page" id="page-calendrier" hidden>
+        <h1 class="titre-page">Calendrier et évènements</h1>
+        <!-- supprimé pour remplacer le texte provisoire par la vraie page Calendrier :
+        <p class="page-vide">Cette page sera construite plus tard.</p>
+        -->
+        <!-- Ajouté pour recevoir le contenu de la page Calendrier, rempli par js/pages/calendrier.js -->
+        <div id="calendrier-contenu"></div>
+      </section>
+
+      <section class="page" id="page-depenses" hidden>
+        <h1 class="titre-page">Dépenses</h1>
+        <!-- supprimé pour remplacer le texte provisoire par la vraie page Dépenses :
+        <p class="page-vide">Cette page sera construite plus tard.</p>
+        -->
+        <!-- Ajouté pour recevoir le contenu de la page Dépenses, rempli par js/pages/depenses.js -->
+        <div id="depenses-contenu"></div>
+      </section>
+
+      <section class="page" id="page-ia" hidden>
+        <h1 class="titre-page">Assistant IA</h1>
+        <!-- supprimé pour remplacer le texte provisoire par la vraie page IA :
+        <p class="page-vide">Cette page sera construite plus tard.</p>
+        -->
+        <!-- Ajouté pour recevoir le contenu de la page IA, rempli par js/pages/ia.js -->
+        <div id="ia-contenu"></div>
+      </section>
+
+      <!-- Ajouté pour la page Paramètres (clé Gemini, question du soir...) -->
+      <section class="page" id="page-parametres" hidden>
+        <h1 class="titre-page">Paramètres</h1>
+        <div id="parametres-contenu"></div>
+      </section>
+    </main>
+
+  </div>
+
+  <!-- type="module" permet d'utiliser import / export entre les fichiers JS -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

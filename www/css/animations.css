@@ -1,0 +1,24 @@
+/* Une seule animation : le fondu quand on change de page */
+@keyframes apparition {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.page:not([hidden]) {
+  animation: apparition 180ms ease-out;
+}
+
+/* Respecte le réglage "réduire les animations" du système */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Ajouté pour l'icône du bouton Synchroniser pendant la synchronisation */
+@keyframes tourner {
+  to { transform: rotate(360deg); }
+}

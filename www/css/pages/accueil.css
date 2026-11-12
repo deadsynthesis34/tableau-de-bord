@@ -1,0 +1,297 @@
+/* Page Accueil */
+
+/* Le titre existe pour les lecteurs d'écran, mais la maquette n'en affiche pas */
+#page-accueil > .titre-page {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.accueil {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Bouton Synchroniser (pas encore relié : la synchronisation viendra plus tard) */
+.bouton-synchro {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-width: 220px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: var(--carte-sombre);
+  color: var(--texte-clair);
+  font-weight: 600;
+}
+
+.bouton-synchro svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* supprimé pour mettre dépenses et "à venir" dans un bloc à part, à hauteur égale :
+.accueil-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr) minmax(0, 0.9fr);
+  gap: 20px;
+  align-items: start;
+}
+*/
+
+/* modifié pour avoir deux zones : à gauche dépenses + à venir, à droite les tâches */
+.accueil-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 0.9fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* Ajouté pour que la carte Dépense hebdo ait la même hauteur que la carte "à venir" */
+.accueil-gauche {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Ajouté pour que le graphique remplisse toute la hauteur de la carte Dépense hebdo */
+.carte-depenses {
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-depenses #graphique-hebdo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Éléments à venir ---------- */
+.liste-avenir {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.element-avenir {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--carte-sombre);
+  color: var(--texte-clair);
+}
+
+.element-date,
+.element-texte,
+.element-cloche {
+  display: flex;
+  flex-direction: column;
+}
+
+.element-jour {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.element-horaire {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+.element-titre {
+  font-weight: 600;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.element-cloche {
+  align-items: center;
+  gap: 2px;
+  font-size: 0.7rem;
+}
+
+.element-cloche svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Bouton "Détails" (le contenu s'ouvrira dans une étape suivante) */
+.bouton-details {
+  align-self: flex-start;
+  padding: 0;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.bouton-details:hover {
+  opacity: 1;
+}
+
+.element-avenir .bouton-details:focus-visible,
+.tache .bouton-details:focus-visible {
+  outline-color: var(--blanc);
+}
+
+/* ---------- Tâches classées par urgence ---------- */
+.groupe-taches + .groupe-taches {
+  margin-top: 18px;
+}
+
+.groupe-titre {
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.liste-taches {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tache {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  color: var(--texte-clair);
+}
+
+.tache-important { background: var(--important); }
+.tache-a-voir    { background: var(--a-voir); }
+.tache-de-cote   { background: var(--de-cote); }
+
+.tache-date {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+.tache-titre {
+  font-weight: 600;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.groupe-vide {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* ---------- Mini calendrier ---------- */
+.mini-calendrier-mois {
+  margin-top: 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.mini-calendrier-grille {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px 2px;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.mini-calendrier-jour-nom {
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.mini-calendrier-jour {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  max-width: 34px;
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.mini-calendrier-jour.aujourdhui {
+  background: var(--cyan);
+  font-weight: 700;
+}
+
+/* Petit point sous les jours qui ont un devoir ou un évènement */
+.mini-calendrier-jour.avec-element::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+.mini-calendrier-jour.aujourdhui.avec-element::after {
+  background: var(--bleu-nuit);
+}
+
+/* ---------- Écrans plus étroits ---------- */
+/* modifié : à cette largeur, les tâches passent sous les deux autres cartes */
+@media (max-width: 1100px) {
+  /* supprimé pour le nouveau découpage :
+  .accueil-grille {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .carte-taches {
+    grid-column: 1 / -1;
+  }
+  */
+  .accueil-grille {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .accueil-grille,
+  .accueil-gauche { /* modifié pour aussi mettre dépenses et "à venir" l'un sous l'autre */
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bouton-synchro {
+    align-self: stretch;
+  }
+}
+
+/* Ajouté pour la ligne "bouton Synchroniser + état de la dernière synchronisation" */
+.synchro-ligne {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.synchro-etat {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.bouton-synchro:disabled {
+  opacity: 0.75;
+  cursor: progress;
+}
+
+.bouton-synchro.en-cours svg {
+  animation: tourner 1s linear infinite;
+}

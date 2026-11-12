@@ -1,0 +1,492 @@
+/* Boutons ronds de la barre latérale */
+.menu-bouton {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: var(--bleu-nuit);
+  transition:
+    transform var(--duree) ease,
+    background-color var(--duree) ease,
+    color var(--duree) ease,
+    box-shadow var(--duree) ease;
+}
+
+.menu-bouton svg {
+  width: 22px;
+  height: 22px;
+}
+
+.menu-bouton:hover {
+  transform: scale(1.08);
+}
+
+/* Page active : rond blanc avec icône cyan */
+.menu-bouton.actif {
+  background: var(--blanc);
+  color: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(0, 192, 254, 0.35);
+}
+
+.menu-bouton:focus-visible {
+  outline-color: var(--blanc);
+}
+
+/* Titres et texte provisoire des pages */
+.titre-page {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.page-vide {
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+/* Ajouté pour les cartes (fond bleu clair) utilisées sur l'Accueil et les autres pages */
+.carte {
+  padding: 20px;
+  border-radius: var(--rayon-carte);
+  background: var(--fond-carte);
+}
+
+.carte-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.carte-titre {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.lien-details {
+  font-size: 0.75rem;
+  color: var(--texte);
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+.lien-details:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Ajouté pour le graphique en barres (Accueil et page Dépenses) */
+.graphique {
+  --hauteur-graphique: 200px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* supprimé pour que le graphique grandisse avec sa carte : grid-template-rows: var(--hauteur-graphique) auto; */
+  grid-template-rows: minmax(var(--hauteur-graphique), 1fr) auto; /* modifié pour que le graphique grandisse avec sa carte */
+  flex: 1; /* Ajouté pour que le graphique remplisse la hauteur de la carte */
+  column-gap: 12px;
+  row-gap: 8px;
+  font-size: 0.75rem;
+}
+
+.graphique-axe {
+  position: relative;
+  min-width: 2.4em;
+}
+
+.graphique-valeur {
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.graphique-zone {
+  position: relative;
+  display: flex;
+}
+
+.graphique-ligne {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px solid rgba(10, 22, 51, 0.12);
+}
+
+.graphique-colonne {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.graphique-barre {
+  width: min(60%, 32px);
+  border-radius: 6px 6px 0 0;
+  background: var(--cyan);
+}
+
+.graphique-etiquettes {
+  grid-column: 2;
+  display: flex;
+}
+
+.graphique-etiquettes span {
+  flex: 1;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* Ajouté pour cacher un texte à l'écran tout en le gardant pour les lecteurs d'écran */
+.visuel-cache {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Ajouté pour la fenêtre popup (utilisée pour l'ajout d'une dépense) */
+.popup {
+  width: min(420px, calc(100vw - 32px));
+  padding: 0;
+  border: 0;
+  border-radius: var(--rayon-carte);
+  background: var(--blanc);
+  color: var(--texte);
+  box-shadow: 0 20px 60px rgba(10, 22, 51, 0.35);
+}
+
+.popup::backdrop {
+  background: rgba(10, 22, 51, 0.55);
+}
+
+/* Ajouté pour le formulaire d'ajout d'une dépense */
+.formulaire-depense {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+}
+
+.formulaire-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.formulaire-titre {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.bouton-annuler {
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  background: #c62f2f;
+  color: var(--blanc);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.formulaire-date {
+  font-size: 0.85rem;
+}
+
+.champ-montant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #eef1f8;
+}
+
+.champ-montant span {
+  font-weight: 600;
+}
+
+.champ-montant input {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 8px;
+  border: 0;
+  border-left: 2px solid var(--bleu-nuit);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1.05rem;
+}
+
+.champ-motifs {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.champ-motifs legend {
+  margin-bottom: 8px;
+  padding: 0;
+  font-weight: 700;
+}
+
+.liste-motifs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.motif {
+  position: relative;
+}
+
+/* Le vrai bouton radio est invisible mais reste cliquable et utilisable au clavier */
+.motif input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.motif span {
+  display: block;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  background: #e6e6e6;
+  font-size: 0.85rem;
+  transition: background-color var(--duree) ease;
+}
+
+.motif input:checked + span {
+  background: var(--cyan);
+  color: var(--bleu-nuit);
+  font-weight: 700;
+}
+
+.motif input:focus-visible + span {
+  outline: 3px solid var(--bleu-nuit);
+  outline-offset: 2px;
+}
+
+.formulaire-erreur {
+  min-height: 1.2em;
+  color: #c62f2f;
+  font-size: 0.8rem;
+}
+
+.bouton-valider {
+  align-self: flex-end;
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  background: var(--cyan);
+  color: var(--bleu-nuit);
+  font-weight: 700;
+}
+
+/* Ajouté pour les petits messages en bas de l'écran (ex : "Dépense supprimée · Annuler") */
+.zone-toasts {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--bleu-nuit);
+  color: var(--blanc);
+  font-size: 0.85rem;
+}
+
+.toast button {
+  color: var(--cyan);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .zone-toasts {
+    bottom: 96px;
+  }
+}
+
+/* Ajouté pour le formulaire d'ajout d'un devoir ou d'un évènement (même style que celui des dépenses) */
+.formulaire-element {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+}
+
+.champ-texte {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.champ-texte input,
+.champ-texte textarea {
+  padding: 10px 12px;
+  border: 1px solid rgba(10, 22, 51, 0.25);
+  border-radius: 10px;
+  background: var(--blanc);
+  color: inherit;
+  font: inherit;
+  font-weight: 400;
+}
+
+.champ-texte textarea {
+  resize: vertical;
+}
+
+.ligne-champs {
+  display: flex;
+  gap: 12px;
+}
+
+.ligne-champs[hidden] {
+  display: none;
+}
+
+.ligne-champs > * {
+  flex: 1;
+}
+
+/* Ajouté pour que la popup reste utilisable sur un petit écran (elle défile si elle est trop haute) */
+.popup {
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}
+
+/* Ajouté pour la fenêtre de détails d'un devoir ou d'un évènement */
+.details-element {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+}
+
+.details-element .formulaire-titre {
+  overflow-wrap: anywhere;
+}
+
+.bouton-fermer {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid rgba(10, 22, 51, 0.3);
+  border-radius: 8px;
+  background: var(--blanc);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.details-type {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.details-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.details-liste dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+.details-liste dd {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.details-rappels {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: normal;
+}
+
+.bouton-supprimer-element {
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  border: 1px solid #c62f2f;
+  border-radius: 10px;
+  color: #c62f2f;
+  font-weight: 600;
+}
+
+.bouton-supprimer-element:hover {
+  background: #c62f2f;
+  color: var(--blanc);
+}
+
+/* Ajouté pour la liste des pièces jointes et les liens dans la fenêtre de détails */
+.details-pieces {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: normal;
+}
+
+.details-liste a {
+  color: var(--bleu-nuit);
+  text-decoration: underline;
+}
+
+/* Ajouté pour les boutons secondaires (bord fin) et les liens-boutons, utilisés par l'IA et les Paramètres */
+.bouton-secondaire {
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(10, 22, 51, 0.3);
+  border-radius: 10px;
+  background: var(--blanc);
+  color: var(--texte);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.bouton-secondaire:hover {
+  background: var(--fond-carte);
+}
+
+.bouton-secondaire:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.bouton-lien {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background: var(--cyan);
+  color: var(--bleu-nuit);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bouton-lien:hover {
+  filter: brightness(0.95);
+}

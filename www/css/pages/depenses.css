@@ -1,0 +1,235 @@
+/* Page Dépenses */
+
+/* Le titre existe pour les lecteurs d'écran, mais la maquette n'en affiche pas */
+#page-depenses > .titre-page {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.depenses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ---------- Ligne du haut : totaux + choix de la période ---------- */
+.depenses-haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.depenses-totaux {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.carte-total {
+  min-width: 210px;
+  padding: 14px 18px;
+}
+
+.total-libelle {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.total-montant {
+  margin-top: 4px;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.total-ligne {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge-variation {
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  color: var(--blanc);
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-variation[hidden] {
+  display: none;
+}
+
+.badge-variation.hausse { background: #c62f2f; }
+.badge-variation.baisse { background: #17794e; }
+.badge-variation.stable { background: #5d6585; }
+
+.selecteur-periode select {
+  min-width: 150px;
+  padding: 10px 40px 10px 16px;
+  border: 1px solid rgba(10, 22, 51, 0.25);
+  border-radius: 10px;
+  background-color: var(--blanc);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a1633' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  color: var(--texte);
+  font: inherit;
+  appearance: none;
+  cursor: pointer;
+}
+
+.depenses-erreur {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fde8e8;
+  color: #8a1f1f;
+  font-size: 0.85rem;
+}
+
+.depenses-erreur[hidden] {
+  display: none;
+}
+
+/* ---------- Ligne du bas : graphique, transactions, boutons + et − ---------- */
+.depenses-bas {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.carte-graphique {
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-graphique #graphique-depenses {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-graphique .graphique {
+  --hauteur-graphique: 260px;
+}
+
+.carte-transactions {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.transactions-defilement {
+  flex: 1;
+  max-height: 340px;
+  overflow: auto;
+}
+
+.tableau-transactions {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  background: var(--blanc);
+  font-size: 0.8rem;
+}
+
+.tableau-transactions[hidden] {
+  display: none;
+}
+
+.tableau-transactions td {
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(10, 22, 51, 0.08);
+}
+
+.tableau-transactions tr:last-child td {
+  border-bottom: 0;
+}
+
+.col-montant {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* La colonne de la croix n'apparaît qu'en mode suppression */
+.tableau-transactions .col-action {
+  display: none;
+  width: 1%;
+}
+
+.tableau-transactions.mode-suppression .col-action {
+  display: table-cell;
+}
+
+.bouton-retirer {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #c62f2f;
+  color: var(--blanc);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.transactions-vide {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.transactions-vide[hidden] {
+  display: none;
+}
+
+.depenses-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bouton-action {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--cyan);
+  color: var(--bleu-nuit);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color var(--duree) ease, color var(--duree) ease;
+}
+
+/* Le bouton − reste foncé tant que le mode suppression est actif */
+.bouton-action[aria-pressed="true"] {
+  background: var(--bleu-nuit);
+  color: var(--blanc);
+}
+
+/* ---------- Écrans plus étroits ---------- */
+@media (max-width: 1100px) {
+  .depenses-bas {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .carte-graphique {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .depenses-bas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .depenses-actions {
+    flex-direction: row;
+  }
+}

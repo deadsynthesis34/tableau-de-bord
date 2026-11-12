@@ -1,0 +1,298 @@
+/* Page Calendrier et évènements */
+
+/* Le titre existe pour les lecteurs d'écran, mais la maquette n'en affiche pas */
+#page-calendrier > .titre-page {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Bande cyan avec les deux onglets (elle va jusqu'aux bords de la page) ---------- */
+.calendrier-onglets {
+  display: flex;
+  gap: 8px;
+  margin: -24px -28px 20px;
+  padding: 14px 28px 0;
+  background: var(--cyan);
+}
+
+.onglet-haut {
+  padding: 10px 28px;
+  border-radius: 16px 16px 0 0;
+  color: var(--bleu-nuit);
+  font-weight: 600;
+  transition: background-color var(--duree) ease;
+}
+
+.onglet-haut[aria-selected="true"] {
+  background: var(--blanc);
+}
+
+.onglet-haut:hover:not([aria-selected="true"]) {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- Vue du mois ---------- */
+.calendrier-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.calendrier-mois {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.calendrier-commandes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bouton-commande {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(10, 22, 51, 0.25);
+  border-radius: 10px;
+  background: var(--blanc);
+  font-weight: 700;
+}
+
+.bouton-commande:hover {
+  background: var(--fond-carte);
+}
+
+.bouton-texte {
+  font-size: 0.85rem;
+}
+
+.bouton-principal {
+  border-color: var(--cyan);
+  background: var(--cyan);
+  color: var(--bleu-nuit);
+}
+
+.bouton-principal:hover {
+  background: var(--cyan);
+  filter: brightness(0.95);
+}
+
+.calendrier-erreur {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fde8e8;
+  color: #8a1f1f;
+  font-size: 0.85rem;
+}
+
+.calendrier-erreur[hidden] {
+  display: none;
+}
+
+/* Sur un petit écran, le calendrier défile sur le côté plutôt que de s'écraser */
+.calendrier-defilement {
+  overflow-x: auto;
+}
+
+.calendrier-grille {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  min-width: 620px;
+  border-top: 2px solid rgba(10, 22, 51, 0.15);
+}
+
+.calendrier-jour-nom {
+  padding: 8px 0;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.calendrier-cellule {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  min-height: 92px;
+  padding: 6px;
+  border-top: 1px solid rgba(10, 22, 51, 0.08);
+}
+
+.jour-numero {
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+}
+
+.calendrier-cellule.hors-mois .jour-numero {
+  opacity: 0.35;
+}
+
+.calendrier-cellule.aujourdhui .jour-numero {
+  background: var(--cyan);
+  font-weight: 700;
+}
+
+/* Un évènement ou un devoir dans une case du calendrier */
+.bloc-element {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: var(--cyan);
+  color: var(--bleu-nuit);
+  text-align: left;
+}
+
+.bloc-element:hover {
+  filter: brightness(0.93);
+}
+
+.bloc-titre {
+  font-size: 0.7rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.bloc-horaire {
+  font-size: 0.65rem;
+  opacity: 0.8;
+}
+
+/* ---------- Onglet Évènements ---------- */
+.evenements-titre {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.sous-onglets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin: 10px 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(10, 22, 51, 0.15);
+}
+
+.sous-onglet {
+  position: relative;
+  padding: 4px 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.sous-onglet[aria-selected="true"] {
+  font-weight: 700;
+  opacity: 1;
+}
+
+/* Trait cyan sous l'onglet choisi */
+.sous-onglet[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -12px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cyan);
+}
+
+.liste-evenements {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.carte-evenement {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--fond-carte);
+}
+
+.evenement-date {
+  display: flex;
+  flex-direction: column;
+}
+
+.evenement-corps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--blanc);
+}
+
+.evenements-vide {
+  padding: 8px 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.zone-ajout {
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  border-radius: 14px;
+  background: var(--fond-carte);
+}
+
+.bouton-ajout-grand {
+  padding: 10px 36px;
+  border-radius: 10px;
+  background: var(--blanc);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.bouton-ajout-grand:hover {
+  background: var(--cyan);
+}
+
+@media (max-width: 700px) {
+  .calendrier-onglets {
+    margin: -16px -16px 16px;
+    padding: 12px 16px 0;
+  }
+
+  .onglet-haut {
+    padding: 10px 18px;
+  }
+
+  .carte-evenement {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .evenement-date {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+/* Ajouté pour les devoirs déjà rendus : ils restent dans le calendrier, mais barrés et plus pâles */
+.bloc-element.fait {
+  opacity: 0.55;
+}
+
+.bloc-element.fait .bloc-titre {
+  text-decoration: line-through;
+}

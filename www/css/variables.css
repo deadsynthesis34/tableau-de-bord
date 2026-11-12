@@ -1,0 +1,30 @@
+/* Toutes les couleurs et mesures du projet sont ici.
+   Pour changer une couleur partout, modifie-la seulement dans ce fichier. */
+:root {
+  /* Couleurs de ta charte graphique */
+  --cyan: #00c0fe;
+  --blanc: #ffffff;
+  --noir: #000000;
+  --bleu-nuit: #0a1633;      /* bleu foncé : valeur estimée d'après l'image, à ajuster si besoin */
+
+  /* Fonds des cartes (valeurs estimées d'après la maquette) */
+  --fond-carte: #e1e8ff;
+  --carte-sombre: #101e42;
+
+  /* Couleurs des trois catégories de tâches (pour plus tard) */
+  --important: #3a0f1f;
+  --a-voir: #2a0c2d;
+  --de-cote: #0f3a2a;
+
+  /* Texte */
+  --texte: #0a1633;
+  --texte-clair: #ffffff;
+
+  /* Police : Plus Jakarta Sans, avec des polices de secours si le fichier manque */
+  --police: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Mesures */
+  --largeur-barre: 72px;
+  --rayon-carte: 18px;
+  --duree: 200ms;
+}

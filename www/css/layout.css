@@ -1,0 +1,83 @@
+/* Structure générale : barre latérale à gauche, contenu à droite */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.barre-laterale {
+  position: sticky;
+  top: 0;
+  width: var(--largeur-barre);
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 16px 0;
+  background: var(--bleu-nuit);
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contenu {
+  flex: 1;
+  min-width: 0;
+  padding: 24px 28px;
+}
+
+/* Sans cette règle, une page avec "hidden" resterait visible si on lui donne un display */
+.page[hidden] {
+  display: none;
+}
+
+/* Sur téléphone : la barre passe en bas de l'écran */
+@media (max-width: 700px) {
+  .barre-laterale {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .menu {
+    flex-direction: row;
+    gap: 22px;
+  }
+
+  .contenu {
+    padding: 16px 16px 96px;
+  }
+}
+
+/* Ajouté pour placer le bouton Paramètres (roue) en bas de la barre latérale sur ordinateur */
+@media (min-width: 701px) {
+  .menu {
+    flex: 1;
+  }
+
+  .menu-element-bas {
+    margin-top: auto;
+  }
+}
